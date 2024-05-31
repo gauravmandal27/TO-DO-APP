@@ -4,8 +4,13 @@ import com.mytodoapp.dto.TaskDTO;
 import com.mytodoapp.model.Task;
 
 public class EntityDtoUtil {
-    public static Task convertToTaskEntity(TaskDTO TaskDTO) {
-        return new Task(TaskDTO.id(), TaskDTO.title(), TaskDTO.description(),TaskDTO.isCompleted());
+    public static Task convertToTaskEntity(TaskDTO taskDto) {
+        Task task = new Task();
+        task.setId(taskDto.id());
+        task.setTitle(taskDto.title());
+        task.setDescription(taskDto.description());
+        task.setCompleted(taskDto.isCompleted());
+        return task;
     }
 
     public static TaskDTO convertToTaskDTO(Task task) {

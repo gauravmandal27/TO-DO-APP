@@ -27,6 +27,14 @@ public class TaskApiErrorHandler{
         return ResponseEntity.status(status).body(errorResponse);
     }
 
+    @ExceptionHandler({DuplicateRecordException.class})
+    public ProblemDetail handleDuplicateRecordException(DuplicateRecordException ex){
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(status,ex.getMessage());
+        problemDetail.setProperty("Message",ex.getClass().getSimpleName());
+        return problemDetail;
+    }
+
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ProblemDetail handleMethodArgumentsException(MethodArgumentNotValidException ex){
         HttpStatus status = HttpStatus.BAD_REQUEST;
